@@ -1,0 +1,273 @@
+
+base = 0.02
+multipliertwo=3
+multiplierone=4
+rtseed=0
+betcount=0
+bethigh=true
+chance=math.random(55*1000, 80*1000)/1000.0
+counter=0
+high=0
+loss=0
+losscount=0
+lostchance=0
+low=0
+prebet=0.01
+preroll=14
+resetseed()
+resetstats()
+session=0
+wincount=0
+wins = 0
+evencount = 0
+maxlosscount = 0
+maxwincount = 0
+
+function dobet()
+		rtseed +=1
+        	if rtseed == rseed then
+		resetseed()
+		rtseed=0
+		end
+
+
+
+    if betcount < preroll then
+	betcount = betcount+ 1
+        nextbet=prebet
+            if win then
+	            wins = wins+2
+            else
+                    loss = loss+1   
+           end                                      
+    end    
+    
+    if betcount == preroll or betcount > preroll then
+           if betcount == preroll then
+            wins = preroll - loss
+            --print("Wins: ".. wins)
+            --print("Loss: ".. loss)
+            betcount = betcount+1
+            count=wins-loss
+               if ((count==0) or (count==-10) or (count==10))  then
+                        nextbet=prebet
+                	evencount =1
+                        print("Resetting")
+               else
+		print ("Win count: "..wincount)
+		print ("Loss count: "..losscount)
+		
+		
+
+			if ((count == -12) or (count == -8) or (count == -6) or (count == -2)  or (count == 4 ) or (count == 8 ) or (count == 14 )) then
+				
+				betlossbalance =(base*multiplierone^2) + (base*multiplierone^1) + base
+				print (string.format("Bet Loss Balance: %.8f", betlossbalance))
+								
+				
+				if losscount == stoponloss then
+					stop()	
+				end
+				if losscount == 0 then
+				chance=math.random(60*1000, 80*1000)/1000.0
+					nextbet= base
+					bethigh=true
+                           	end
+                		if losscount == 1 then
+					nextbet= base*multiplierone^1 
+					bethigh=true
+				end
+				if losscount == 2 then 				chance=math.random(70*1000, 80*1000)/1000.0
+					nextbet= base*multiplierone^2
+					bethigh=true
+                           	end
+                		if losscount == 3 then
+			chance=math.random(75*1000, 80*1000)/1000.0		
+					nextbet= betlossbalance*multipliertwo^1 
+					bethigh=true
+                           	end
+				if losscount == 4 then
+				chance=math.random(75*1000, 80*1000)/1000.0	
+					
+					nextbet= betlossbalance*multipliertwo^2 
+					bethigh=true
+                           	end
+				if losscount == 5 then
+				chance=math.random(75*1000, 80*1000)/1000.0	
+					
+					nextbet= betlossbalance*multipliertwo^3 
+					bethigh=true
+                           	end
+				if losscount == 6 then 				
+					
+					
+					nextbet= betlossbalance*multipliertwo^4
+					bethigh=true
+                           	end
+				if losscount == 7 then 				
+					
+					
+					nextbet= betlossbalance*multipliertwo^5
+					bethigh=true
+                           	end
+				if losscount == 8 then 				
+					
+					
+					nextbet= betlossbalance*multipliertwo^6
+					bethigh=true
+                           	end
+				if losscount == 9 then 				
+					
+					
+					nextbet= betlossbalance*multipliertwo^7
+					bethigh=true
+                           	end
+				if losscount == 10 then 				
+					
+					
+					nextbet= betlossbalance*multipliertwo^8
+					bethigh=true
+                           	end
+				if losscount == 11 then 				 								
+					stop()
+                		end
+
+
+  	    		else
+
+				betlossbalance =(base*multiplierone^2) + (base*multiplierone^1) + base
+				print (string.format("Bet Loss Balance: %.8f", betlossbalance))
+								
+				
+				if losscount == stoponloss then
+					stop()	
+				end
+				if losscount == 0 then
+					nextbet= base
+					bethigh=false
+                           	end
+                		if losscount == 1 then
+					nextbet= base*multiplierone^1 
+					bethigh=false
+				end
+				if losscount == 2 then 				
+					nextbet= base*multiplierone^2
+					bethigh=false
+                           	end
+                		if losscount == 3 then
+					
+					nextbet= betlossbalance*multipliertwo^1 
+					bethigh=false
+                           	end
+				if losscount == 4 then
+					
+					
+					nextbet= betlossbalance*multipliertwo^2 
+					bethigh=false
+                           	end
+				if losscount == 5 then
+					
+					
+					nextbet= betlossbalance*multipliertwo^3 
+					bethigh=false
+                           	end
+				if losscount == 6 then 				
+					
+					
+					nextbet= betlossbalance*multipliertwo^4
+					bethigh=false
+                           	end
+				if losscount == 7 then 				
+					
+					
+					nextbet= betlossbalance*multipliertwo^5
+					bethigh=false
+                           	end
+				if losscount == 8 then 				
+					
+					
+					nextbet= betlossbalance*multipliertwo^6
+					bethigh=false
+                           	end
+				if losscount == 9 then 				
+					
+					
+					nextbet= betlossbalance*multipliertwo^7
+					bethigh=false
+                           	end
+				if losscount == 10 then 				
+					
+					
+					nextbet= betlossbalance*multipliertwo^8
+					bethigh=false
+                           	end
+				if losscount == 11 then 				 								
+					stop()
+                		end
+
+																
+	            	end
+		
+               	end
+        
+    else
+            if evencount ==1 then
+                	--print("wincount: ".. wincount)
+                	--print("losscount: ".. losscount)
+			print("Total Wins: ".. maxwincount)
+		    	print("Total Loss: ".. maxlosscount)
+                   	--print (string.format("New Base: %.8f", newbase))
+                bethigh=true
+                nextbet=prebet
+                betcount=0
+                wins=0
+                loss=0
+                resetstats()
+                --resetseed()
+                evencount=0
+            
+            else
+                if win then      
+                    wincount +=1
+                        if wincount > maxwincount then
+                        	maxwincount = wincount
+                        end
+                    losscount=0
+		   -- print("wincount: ".. wincount)
+		   -- print("losscount: ".. losscount)
+                    print("Total Wins: ".. maxwincount)
+		    print("Total loss: ".. maxlosscount)
+                   -- print (string.format("New Base: %.8f", newbase))
+                    bethigh=true
+                    nextbet=prebet
+                    betcount=0
+                    wins=0
+                    loss=0
+                    resetstats()
+                   -- resetseed()
+                else
+                     losscount +=1
+                     	if losscount > maxlosscount then
+                        	maxlosscount = losscount
+                        end
+                    wincount=0
+                   -- print("wincount: ".. wincount)
+                   -- print("losscount: ".. losscount)
+                    print("Total Wins: ".. maxwincount)
+		    print("Total loss: ".. maxlosscount)
+                   -- print (string.format("New Base: %.8f", newbase))
+                    bethigh=true
+                    nextbet=prebet
+                    betcount=0
+                    wins=0
+                    loss=0
+                    resetstats()
+		   -- resetseed()
+                 end
+
+            end
+            
+        end
+            
+    end
+end
