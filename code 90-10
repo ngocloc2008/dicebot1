@@ -1,0 +1,42 @@
+base=0.050000000002735275
+nextbet=base
+chance=90
+win=0
+lose=0
+nextbet = base 
+bethigh = false
+bethigh = true
+low = 0
+high = 0
+countwin=0
+countlose=0
+rollcount = 10
+tg=10000 + balance
+function dobet()
+if balance > tg then
+stop()
+end
+if(bets%2==0) then
+bethigh=true
+else
+bethigh=false
+end
+if rollcount == 10 then
+rollcount = 0
+resetseed();
+else
+rollcount = rollcount + 1
+
+end
+if win then
+chance=90	
+nextbet=base
+else
+chance=math.random(10,15.5)
+nextbet=previousbet*1.25
+if currentstreak <=-200 then
+chance=95
+nextbet=base
+end
+end
+end
