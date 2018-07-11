@@ -1,6 +1,6 @@
 
-base = 0.02
-multipliertwo=3
+base = 0.00000020
+multipliertwo=5
 multiplierone=4
 rtseed=0
 betcount=0
@@ -12,7 +12,7 @@ loss=0
 losscount=0
 lostchance=0
 low=0
-prebet=0.01
+prebet=0.00000010
 preroll=14
 resetseed()
 resetstats()
